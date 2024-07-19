@@ -5,7 +5,7 @@ import numpy as np
 import random
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
-from textblob import TextBlob
+
 from unidecode import unidecode
 
 # Inicialización del lematizador
