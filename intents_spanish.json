@@ -1,0 +1,204 @@
+{
+    "intents": [
+        {
+            "tag": "saludo",
+            "patterns": ["hola", "buenos dias", "buenas tardes"],
+            "responses": ["Hola, ¿cómo puedo ayudarte hoy?", "¡Buenas! ¿Qué necesitas?"]
+        },
+        {
+            "tag": "despedida",
+            "patterns": ["adiós", "hasta luego", "nos vemos"],
+            "responses": ["Adiós, ¡que tengas un buen día!", "Hasta luego, ¡vuelve pronto!"]
+        },
+        {
+            "tag": "costo_instalacion_paneles",
+            "patterns": ["¿Cuánto cuesta instalar paneles solares en mi hogar?", "precio de instalación de paneles solares", "¿cuál es el costo de instalar paneles solares?"],
+            "responses": ["El costo varía según el tamaño del sistema y las necesidades energéticas específicas. Ofrecemos cotizaciones personalizadas."]
+        },
+        {
+            "tag": "financiamiento",
+            "patterns": ["¿Ofrecen financiamiento para la compra de sus productos?", "¿hay opciones de financiamiento?", "¿puedo financiar la compra?"],
+            "responses": ["Sí, contamos con opciones de financiamiento para facilitar la adquisición de nuestros productos y servicios."]
+        },
+        {
+            "tag": "mantenimiento_sistemas",
+            "patterns": ["¿Qué tipo de mantenimiento requieren los sistemas de energía renovable?", "mantenimiento de sistemas de energía renovable", "¿cómo se mantienen los sistemas de energía?"],
+            "responses": ["Generalmente, requieren poco mantenimiento, pero ofrecemos planes de mantenimiento anual para asegurar el óptimo funcionamiento de los sistemas."]
+        },
+        {
+            "tag": "tiempo_instalacion",
+            "patterns": ["¿Cuánto tiempo tarda la instalación de los paneles solares?", "duración de la instalación de paneles solares", "¿cuánto se tarda en instalar los paneles solares?"],
+            "responses": ["La instalación promedio toma entre 1 y 3 días, dependiendo del tamaño del sistema y las condiciones del sitio."]
+        },
+        {
+            "tag": "combinacion_productos",
+            "patterns": ["¿Puedo combinar diferentes productos?", "¿puedo usar paneles solares y baterías juntos?", "¿es posible combinar sus productos?"],
+            "responses": ["Sí, nuestros sistemas están diseñados para ser integrables y maximizar la eficiencia energética."]
+        },
+        {
+            "tag": "politica_devoluciones",
+            "patterns": ["¿Cuál es su política de devoluciones?", "devoluciones", "¿puedo devolver un producto?"],
+            "responses": ["Aceptamos devoluciones dentro de los 30 días posteriores a la compra si el producto está en condiciones originales."]
+        },
+        {
+            "tag": "garantias",
+            "patterns": ["¿Tienen garantías?", "garantías de productos", "¿qué garantías ofrecen?"],
+            "responses": ["Nuestros productos tienen una garantía de 10 años. También ofrecemos garantías extendidas."]
+        },
+        {
+            "tag": "envios",
+            "patterns": ["¿Ofrecen envíos?", "política de envíos", "¿hacen envíos gratuitos?"],
+            "responses": ["Realizamos envíos gratuitos dentro del país para pedidos superiores a $500. Los tiempos de entrega varían entre 3 a 7 días hábiles."]
+        },
+        {
+            "tag": "horario_atencion",
+            "patterns": ["¿Cuál es su horario de atención?", "horarios de atención", "¿cuándo están abiertos?"],
+            "responses": ["Nuestro horario de atención es de Lunes a Viernes: 9:00 AM - 6:00 PM y Sábado: 10:00 AM - 2:00 PM. Domingo: Cerrado."]
+        },
+        {
+            "tag": "metodos_contacto",
+            "patterns": ["¿Cuáles son sus métodos de contacto?", "contacto", "¿cómo puedo comunicarme con ustedes?"],
+            "responses": ["Puedes contactarnos por teléfono al +1 (800) 123-4567, por correo electrónico a soporte@ecosmartsolutions.com o a través del chat en vivo en nuestro sitio web de 9:00 AM a 6:00 PM (Lunes a Viernes). También estamos en Facebook, Instagram y Twitter (@EcoSmartSolutions)."]
+        },
+        {
+            "tag": "ubicacion",
+            "patterns": ["¿Dónde están ubicados?", "ubicación de la tienda", "dirección de la tienda"],
+            "responses": ["Estamos ubicados en 1234 Green Energy Lane, Suite 101, San Francisco, CA, 94103."]
+        },
+        {
+            "tag": "promociones",
+            "patterns": ["¿Tienen promociones?", "descuentos", "¿hay algún descuento?"],
+            "responses": ["Ofrecemos un 10% de descuento en la primera compra para nuevos clientes, descuentos especiales durante el verano y el invierno para nuestros productos más populares y un programa de referidos para ganar descuentos adicionales al referir nuevos clientes."]
+        },
+        {
+            "tag": "proceso_compra",
+            "patterns": ["¿Cómo es el proceso de compra?", "proceso para comprar", "¿cómo puedo comprar sus productos?"],
+            "responses": ["Puedes comprar en línea visitando nuestro sitio web, seleccionando los productos o servicios que deseas adquirir, agregándolos al carrito de compra y procediendo al checkout. También puedes comprar en nuestra tienda física en San Francisco. Para servicios, contacta con nuestro equipo de soporte para una consulta inicial, programa una visita de evaluación, recibe una propuesta personalizada y agenda la instalación o servicio."]
+        },
+        {
+            "tag": "beneficios_energias_renovables",
+            "patterns": ["¿Cuáles son los beneficios de usar energías renovables?", "ventajas de las energías renovables", "¿por qué debería usar energías renovables?"],
+            "responses": ["Las energías renovables reducen la huella de carbono, disminuyen los costos energéticos a largo plazo y contribuyen a la sostenibilidad del planeta."]
+        },
+        {
+            "tag": "certificaciones",
+            "patterns": ["¿Tienen certificaciones?", "certificaciones de sus productos", "¿sus productos están certificados?"],
+            "responses": ["Sí, todos nuestros productos cuentan con certificaciones de calidad y cumplen con los estándares internacionales."]
+        },
+        {
+            "tag": "calificacion_credito_financiamiento",
+            "patterns": ["¿Necesito una buena calificación crediticia para el financiamiento?", "requisitos de crédito para financiamiento", "¿cómo califico para el financiamiento?"],
+            "responses": ["Ofrecemos varias opciones de financiamiento y evaluamos cada caso de manera individual para encontrar la mejor solución para ti."]
+        },
+        {
+            "tag": "seguimiento_pedido",
+            "patterns": ["¿Cómo puedo hacer el seguimiento de mi pedido?", "rastrear pedido", "seguimiento de envío"],
+            "responses": ["Puedes hacer el seguimiento de tu pedido a través del enlace de rastreo que te enviamos por correo electrónico después de la compra."]
+        },
+        {
+            "tag": "auditoria_energetica",
+            "patterns": ["¿Qué incluye una auditoría energética?", "auditoría energética", "¿qué revisan en una auditoría energética?"],
+            "responses": ["Una auditoría energética incluye una revisión completa de tu consumo energético, identificación de áreas de mejora y recomendaciones para aumentar la eficiencia energética."]
+        },
+        {
+            "tag": "capacitacion_sostenibilidad",
+            "patterns": ["¿Qué tipo de capacitaciones en sostenibilidad ofrecen?", "capacitaciones en energía renovable", "¿cómo puedo aprender sobre sostenibilidad con ustedes?"],
+            "responses": ["Ofrecemos capacitaciones en eficiencia energética, uso de energías renovables y prácticas sostenibles para empresas y particulares."]
+        },
+        {
+            "tag": "servicios_mantenimiento",
+            "patterns": ["¿Qué servicios de mantenimiento ofrecen?", "mantenimiento de sistemas", "¿cómo mantienen los sistemas de energía?"],
+            "responses": ["Ofrecemos servicios de mantenimiento para paneles solares, sistemas de almacenamiento de energía y equipos de energía eólica, asegurando su óptimo funcionamiento."]
+        },
+        {
+            "tag": "informacion_producto",
+            "patterns": ["Quiero saber más sobre un producto específico", "información de producto", "detalles de producto"],
+            "responses": ["Claro, ¿podrías especificar sobre qué producto te gustaría saber más?"]
+        },
+        {
+            "tag": "estado_pedido",
+            "patterns": ["¿Cuál es el estado de mi pedido?", "estado de mi orden", "¿dónde está mi pedido?"],
+            "responses": ["Para conocer el estado de tu pedido, por favor proporciona tu número de orden."]
+        },
+        {
+            "tag": "duracion_garantia",
+            "patterns": ["¿Cuánto dura la garantía de sus productos?", "duración de la garantía", "¿cuántos años de garantía tienen?"],
+            "responses": ["Nuestros productos tienen una garantía de 10 años. También ofrecemos garantías extendidas."]
+        },
+        {
+            "tag": "requisitos_instalacion",
+            "patterns": ["¿Qué requisitos hay para la instalación de paneles solares?", "requisitos para instalar paneles solares", "¿necesito algo especial para la instalación?"],
+            "responses": ["No necesitas nada especial, pero haremos una evaluación previa de tu sitio para asegurarnos de que todo esté listo para la instalación."]
+        },
+        {
+            "tag": "promocion_actual",
+            "patterns": ["¿Cuál es la promoción actual?", "promociones disponibles", "¿qué descuentos tienen ahora?"],
+            "responses": ["Actualmente ofrecemos un 10% de descuento en la primera compra para nuevos clientes y descuentos especiales en productos seleccionados durante el verano y el invierno."]
+        },
+        {
+            "tag": "beneficios_paneles_solares",
+            "patterns": ["¿Cuáles son los beneficios de instalar paneles solares?", "ventajas de los paneles solares", "¿por qué debería instalar paneles solares?"],
+            "responses": ["Los paneles solares ayudan a reducir tu factura de electricidad, aumentan el valor de tu propiedad y contribuyen a la sostenibilidad ambiental."]
+        },
+        {
+            "tag": "compatibilidad_productos",
+            "patterns": ["¿Son compatibles sus productos con los de otras marcas?", "compatibilidad con otros productos", "¿puedo usar sus productos con los de otras marcas?"],
+            "responses": ["Nuestros productos están diseñados para ser compatibles con una amplia variedad de sistemas y marcas, pero recomendamos una evaluación para asegurar la mejor integración."]
+        },
+        {
+            "tag": "tiempo_reembolso",
+            "patterns": ["¿Cuánto tiempo tarda el reembolso?", "tiempo de reembolso", "¿cuándo recibiré mi dinero de vuelta?"],
+            "responses": ["El reembolso se procesa dentro de los 7 a 10 días hábiles después de la aprobación de la devolución."]
+        },
+        {
+            "tag": "diferencia_productos",
+            "patterns": ["¿Cuál es la diferencia entre sus paneles solares y otros?", "diferencia entre productos", "¿qué hace que sus paneles solares sean mejores?"],
+            "responses": ["Nuestros paneles solares se destacan por su alta eficiencia, durabilidad y garantía extendida. Utilizamos la última tecnología para asegurar el mejor rendimiento."]
+        },
+        {
+            "tag": "financiacion_tasa_interes",
+            "patterns": ["¿Cuál es la tasa de interés para el financiamiento?", "tasa de interés de financiamiento", "¿cuánto es la tasa de interés?"],
+            "responses": ["La tasa de interés varía según el plan de financiamiento y tu calificación crediticia. Te proporcionaremos una tasa personalizada durante el proceso de solicitud."]
+        },
+        {
+            "tag": "energía_producida",
+            "patterns": ["¿Cuánta energía puede producir un sistema de paneles solares?", "producción de energía de paneles solares", "¿cuánta energía generan los paneles solares?"],
+            "responses": ["La cantidad de energía producida depende del tamaño del sistema y la cantidad de sol que recibe tu ubicación. En promedio, un sistema residencial puede generar entre 3 a 10 kWh por día."]
+        },
+        {
+            "tag": "contacto_soporte",
+            "patterns": ["Necesito ayuda, ¿cómo contacto con soporte?", "contactar soporte", "¿cómo obtengo ayuda?"],
+            "responses": ["Puedes contactar a nuestro equipo de soporte llamando al +1 (800) 123-4567 o enviando un correo a soporte@ecosmartsolutions.com."]
+        },
+        {
+            "tag": "consulta_personalizada",
+            "patterns": ["Quiero una consulta personalizada", "consulta a medida", "¿cómo puedo obtener una consulta personalizada?"],
+            "responses": ["Para una consulta personalizada, por favor llámanos al +1 (800) 123-4567 o completa el formulario en nuestro sitio web y nos pondremos en contacto contigo."]
+        },
+        {
+            "tag": "historial_pedidos",
+            "patterns": ["¿Cómo puedo ver mi historial de pedidos?", "historial de compras", "¿dónde veo mis pedidos anteriores?"],
+            "responses": ["Puedes ver tu historial de pedidos iniciando sesión en tu cuenta en nuestro sitio web y navegando a la sección de 'Mis Pedidos'."]
+        },
+        {
+            "tag": "productos_nuevos",
+            "patterns": ["¿Tienen nuevos productos?", "novedades de productos", "¿qué productos nuevos ofrecen?"],
+            "responses": ["Sí, siempre estamos innovando. Te invitamos a visitar la sección de 'Novedades' en nuestro sitio web para ver nuestros últimos productos."]
+        },
+        {
+            "tag": "informacion_baterias",
+            "patterns": ["Quiero saber más sobre sus baterías", "detalles de las baterías", "información sobre sistemas de almacenamiento de energía"],
+            "responses": ["Nuestras baterías de almacenamiento de energía son de alta capacidad, seguras y fáciles de integrar con sistemas de energía renovable. Contáctanos para más detalles."]
+        },
+        {
+            "tag": "politica_privacidad",
+            "patterns": ["¿Cuál es su política de privacidad?", "privacidad", "¿cómo manejan mis datos personales?"],
+            "responses": ["Nuestra política de privacidad asegura que tus datos personales estén protegidos. Puedes leerla en detalle en nuestro sitio web."]
+        },
+        {
+            "tag": "factura_electronica",
+            "patterns": ["¿Ofrecen factura electrónica?", "factura digital", "¿puedo recibir una factura electrónica?"],
+            "responses": ["Sí, ofrecemos facturas electrónicas. Puedes solicitarla durante el proceso de compra o contactando a nuestro equipo de soporte."]
+        }
+    ]
+}
