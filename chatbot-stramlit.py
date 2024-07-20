@@ -1,5 +1,10 @@
 import streamlit as st
 from chatbot_load import predict_class, get_response, intents
+import nltk
+
+# Descargar recursos necesarios
+nltk.download('punkt')
+nltk.download('wordnet')
 
 st.title("Asistente virtual")
 
