@@ -2,6 +2,6 @@ nltk
 unidecode
 requests
 numpy
-keras
-tensorflow
+tensorflow==2.9.0
+keras==2.9.0
 streamlit
