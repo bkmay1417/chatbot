@@ -3,6 +3,8 @@ import json
 import pickle
 import numpy as np
 import random
+import requests
+import io
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 from unidecode import unidecode
@@ -16,11 +18,29 @@ def correct_spelling(text):
     #texto =str(TextBlob(texto).correct())
     return texto
 
-# Cargar datos
-intents = json.loads(open('intents_spanish.json', 'r', encoding='utf-8').read())
-words = pickle.load(open('words_spanish.pkl', 'rb'))
-classes = pickle.load(open('classes_spanish.pkl', 'rb'))
-model = load_model('chatbot_model.h5')
+def load_pickle_from_url(url):
+    """Carga un archivo pickle desde una URL."""
+    response = requests.get(url)
+    response.raise_for_status()  # Verifica que la solicitud haya sido exitosa
+    return pickle.load(io.BytesIO(response.content))
+
+def load_json_from_url(url):
+    """Carga un archivo JSON desde una URL."""
+    response = requests.get(url)
+    response.raise_for_status()  # Verifica que la solicitud haya sido exitosa
+    return response.json()
+
+# URLs de los archivos
+intents_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/intents_spanish.json'  # Reemplaza <commit> con el commit correcto
+words_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/words_spanish.pkl'       # Reemplaza <commit> con el commit correcto
+classes_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/classes_spanish.pkl'   # Reemplaza <commit> con el commit correcto
+model_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/chatbot_model.h5'         # Reemplaza <commit> con el commit correcto
+
+# Cargar archivos
+intents = load_json_from_url(intents_url)
+words = load_pickle_from_url(words_url)
+classes = load_pickle_from_url(classes_url)
+model = load_model(model_url)
 
 def clean_up_sentence(sentence):
     """Tokeniza y lematiza la oración."""
