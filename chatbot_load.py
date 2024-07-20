@@ -34,13 +34,13 @@ def load_json_from_url(url):
 intents_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/intents_spanish.json'  # Reemplaza <commit> con el commit correcto
 words_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/words_spanish.pkl'       # Reemplaza <commit> con el commit correcto
 classes_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/classes_spanish.pkl'   # Reemplaza <commit> con el commit correcto
-model_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/chatbot_model.h5'         # Reemplaza <commit> con el commit correcto
+
 
 # Cargar archivos
 intents = load_json_from_url(intents_url)
 words = load_pickle_from_url(words_url)
 classes = load_pickle_from_url(classes_url)
-model = load_model(model_url)
+model = load_model('/workspaces/chatbot/chatbot_model.h5')
 
 def clean_up_sentence(sentence):
     """Tokeniza y lematiza la oración."""
