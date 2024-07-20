@@ -8,6 +8,8 @@ import io
 from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 from unidecode import unidecode
+import tempfile
+import tensorflow as tf
 
 # Inicialización del lematizador
 lemmatizer = WordNetLemmatizer()
@@ -35,12 +37,29 @@ intents_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa73
 words_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/words_spanish.pkl'       # Reemplaza <commit> con el commit correcto
 classes_url = 'https://github.com/bkmay1417/chatbot/raw/501f470b57007c3c8e2faa732a9848a3f5bb05f8/classes_spanish.pkl'   # Reemplaza <commit> con el commit correcto
 
+# URL del modelo en GitHub
+model_url = 'https://github.com/bkmay1417/chatbot/blob/6b8460de8a4b5bd8b993ce206b6efef916a49ace/chatbot_model.h5?raw=True'
+
+# Descargar y cargar el modelo
+def load_model_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.h5') as temp_file:
+            temp_file.write(response.content)
+            temp_file_path = temp_file.name
+        return tf.keras.models.load_model(temp_file_path)
+    else:
+        st.error(f"Error al descargar el archivo: {response.status_code}")
+        return None
+
+model = load_model_from_url(model_url)
+
 
 # Cargar archivos
 intents = load_json_from_url(intents_url)
 words = load_pickle_from_url(words_url)
 classes = load_pickle_from_url(classes_url)
-model = load_model('/workspaces/chatbot/chatbot_model.h5')
+
 
 def clean_up_sentence(sentence):
     """Tokeniza y lematiza la oración."""
