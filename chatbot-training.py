@@ -1,94 +1,99 @@
-import nltk
-from nltk.stem import WordNetLemmatizer
 import json
-import pickle
-import numpy as np 
+import numpy as np
 from keras.models import Sequential
-from keras.layers import Dense, Dropout
+from keras.layers import Dense, Dropout, Embedding, Flatten
 from keras.optimizers import SGD
-from keras.optimizers.schedules import ExpontialDecay
+from keras.optimizers.schedules import ExponentialDecay
+from gensim.models import Word2Vec
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+import pickle
 import random
 from unidecode import unidecode
+import re
 
-data_file = open('intents_spanish.json','r',encoding='utf-8').read()
-intents =json.loads(data_file)
+# Función para preprocesar texto
+def preprocess_text(text):
+    text = text.lower()
+    text = unidecode(text)  # Eliminar acentos
+    text = re.sub(r'\W', ' ', text)
+    return word_tokenize(text)
 
-lemmatizer = WordNetLemmatizer()
+# Función para cargar el modelo Word2Vec
+def load_word2vec_model(model_path):
+    model = Word2Vec.load(model_path)
+    return model
 
-words=[]
-classses =[]
-documents= []
-ignore_words = ['?','!','.',',','¿','¡','¿','¡','¿']
+# Función para crear el embedding matrix
+def create_embedding_matrix(word2vec_model, words, embedding_dim=300):
+    embedding_matrix = np.zeros((len(words), embedding_dim))
+    for i, word in enumerate(words):
+        if word in word2vec_model.wv:
+            embedding_matrix[i] = word2vec_model.wv[word]
+        else:
+            embedding_matrix[i] = np.random.normal(size=(embedding_dim,))
+    return embedding_matrix
 
-#recorre cada intencion y sus patrones en el archivo json
-for intent in intents['intents']:
-    for pattern in intent['patterns']:
-        pattern = unidecode(pattern)
-        #tokeniza las palabras en cada patron y agrega a la lista de palabras
-        w= nltk.word_tokenize(pattern)
-        words.extend(w)
-        #agrega el par (patron,etiqueta) a la lista de documentos
-        documents.append((w,intent['tag']))
-        #si la etiqueta no esta en la lista de clases la agrega
-        if intent['tag'] not in classes:
-            classes.append(intent['tag'])
+# Función para crear el modelo de chatbot
+def create_chatbot_model(train_x, train_y, embedding_matrix, words, classes):
+    model = Sequential()
+    model.add(Embedding(input_dim=len(words), output_dim=300, weights=[embedding_matrix], input_length=len(words), trainable=False))
+    model.add(Flatten())
+    model.add(Dense(128, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(64, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(len(classes), activation='softmax'))
 
-#lematiza las palabras y las covierte en minusculas,escluyecndo las palabras ignoradas
-words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignore_words]
-words = sorted(list(set(words)))
-classes = sorted(list(set(classes)))
+    lr_schedule = ExponentialDecay(initial_learning_rate=0.01, decay_steps=10000, decay_rate=0.9)
+    sgd = SGD(learning_rate=lr_schedule, momentum=0.9, nesterov=True)
+    model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-#guarda las lista ded palabras y clases en archivos pickle
-pickle.dump(words,open('words_spanish.pkl','wb'))
-pickle.dump(classes,open('classes_spanish.pkl','wb'))
+    hist = model.fit(train_x, train_y, epochs=200, batch_size=5, verbose=1)
+    model.save('chatbot_model.h5')
+    print("Modelo del chatbot creado y guardado como 'chatbot_model.h5'")
+    return model
 
-training = []
-output_empty = [0] * len(classes)
+if __name__ == "__main__":
+    with open('intents_spanish.json', 'r', encoding='utf-8') as file:
+        intents = json.load(file)
+    
+    lemmatizer = WordNetLemmatizer()
+    words = []
+    classes = []
+    documents = []
+    ignore_words = ['?', '!', '.', ',', '¿', '¡']
 
-#crea el conjunto de entrenamiendo
-for doc in documents:
-    bag = []
-    pattern_words = doc[0]
-    pattern_words = [lemmatizer.lemmatize(word.lower())for word in pattern_words]
-    for word in words:
-        #crea un bolsa de palabras binaria para cada patron
-        bag.append(1) if word in pattern_words else bag.append(0)
-    output_row = list (output_empty)
-    #crea un vector de salida con un 1 en la posicion correspondiente ala etiqueta
-    output_row[classes.index(doc[1])] = 1
-    training.append([bag,output_row])
+    for intent in intents['intents']:
+        for pattern in intent['patterns']:
+            pattern = unidecode(pattern)
+            w = preprocess_text(pattern)
+            words.extend(w)
+            documents.append((w, intent['tag']))
+            if intent['tag'] not in classes:
+                classes.append(intent['tag'])
 
-#mescla aleeotaariamente el conjunto de entrenamiento
-random.shuffle(training)
+    words = sorted(list(set(words)))
+    classes = sorted(list(set(classes)))
 
-#divide el conjunto de entrenamienento en caresteristicas (train_x) y etiquetas (train_y)
-train_x = [row[0] for row in training]
-train_y = [row[1] for row in training]
+    sentences = [doc[0] for doc in documents]
+    word2vec_model = load_word2vec_model('word2vec_chatbot.model')
+    embedding_matrix = create_embedding_matrix(word2vec_model, words)
 
-train_x = np.array(train_x)
-train_y = np.array(train_y)
+    training = []
+    output_empty = [0] * len(classes)
 
-# crea el mpdelo de red neuronal
-model = Sequential()
-model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(64, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(len(train_y[0]), activation='softmax'))
+    for doc in documents:
+        bag = np.zeros(len(words))
+        pattern_words = doc[0]
+        for word in pattern_words:
+            if word in words:
+                bag[words.index(word)] = 1
+        output_row = list(output_empty)
+        output_row[classes.index(doc[1])] = 1
+        training.append([bag, output_row])
 
-#configura el optimizador con una tasse de aprendizaje exponencialemnte decreciente
-lr_schedule = ExpontialDecay(
-    initial_learning_rate=0.01,
-    decay_steps=10000,
-    decay_rate=0.9,
-)
+    train_x = np.array([row[0] for row in training])
+    train_y = np.array([row[1] for row in training])
 
-sgd = SGD(learning_rate = lr_schedule,momentum=0.9, nestrov =True)
-model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics = ['accuracy'])
-
-#entrena el modelo con el conjunto de entrenamiento
-hist = model.fit(np.array(train_x),np.array(train_y), epochs=200, batch_size=5, verbose=1)
-
-#guarda el modelo entrenado en un archivo h5
-model.save('chatbot_model.h5', hist)
-print("modedelo creado")
+    create_chatbot_model(train_x, train_y, embedding_matrix, words, classes)
