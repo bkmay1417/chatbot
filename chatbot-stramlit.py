@@ -57,7 +57,7 @@ if st.session_state.show_suggestions:
             st.session_state.messages.append({"role": "assistant", "content": res})
             st.session_state.user_interacted = True
             st.session_state.show_suggestions = False  # Ocultar sugerencias después de seleccionar una
-            st.experimental_rerun()  # Reejecutar la app para actualizar la vista
+            break  # Salir del bucle después de seleccionar una sugerencia
 
 # Procesar el mensaje del usuario
 if prompt := st.chat_input("Escribe tu pregunta aquí..."):
@@ -75,7 +75,6 @@ if prompt := st.chat_input("Escribe tu pregunta aquí..."):
     with st.chat_message("assistant"):
         st.markdown(res)
     st.session_state.messages.append({"role": "assistant", "content": res})
-    st.experimental_rerun()  # Reejecutar la app para actualizar la vista
 
 # Mostrar el horario de atención y métodos de contacto solo si el usuario no ha interactuado
 if not st.session_state.user_interacted:
