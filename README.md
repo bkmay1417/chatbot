@@ -45,6 +45,9 @@ Para ejecutar el script de Streamlit, simplemente ejecuta el siguiente comando e
 ```
 streamlit run chatbot-stramlit.py
 ```
+## Acceso al Streamlit
+
+Puedes acceder a la API en el siguiente enlace: [Mi Streamlit](https://chatbot-f4agujo33egcfeutr3chbe.streamlit.app)
 
 ## Desarrolladores
 
