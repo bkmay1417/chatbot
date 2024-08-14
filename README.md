@@ -1,6 +1,8 @@
 # chatbot
 <div style="display: flex; align-items: center;">
-    <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green" />
+    
+<img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green" />
+    
 </div>
 Este proyecto implementa un chatbot en español utilizando una red neuronal y diversas tecnologías de procesamiento de lenguaje natural (NLP). El proyecto incluye scripts para entrenar el modelo, cargarlo y utilizarlo en una aplicación Streamlit para ofrecer una interacción amigable con el usuario.
 
